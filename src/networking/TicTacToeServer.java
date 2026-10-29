@@ -381,28 +381,22 @@ public class TicTacToeServer extends JFrame {
                 while (!isGameOver())
                 {
 
-                    //after each player has their turn, it will restart from here for the new player
+                    // Wait until this client actually sends a move
+                    if (input.hasNextInt())
+                        {
+                            int location = input.nextInt();
 
-                    int location = 0; //initialize move location
-
-                    //the program maintains board locations as numbers from 0 to 8 (0 - 2 for the first row, 3 - 5 for the second row and 6 - 8 for the third row)
-
-
-                    //get the clients move location by using our inputStream
-                    if(input.hasNext()) //when the client clicks a spot on the board it sends that spot to us the server so we check the input stream if anything has been sent
-                        location = input.nextInt(); //get move location.. we set location to whatever client sent
-
-
-                    //check for valid move
-                    if(validateAndMove(location,playerNumber))
-                    {
-                        displayMessage("\nlocation: " + location); //displays the location to our main server application
-                    }
-                    else
-                    {
-                        output.format("Invalid move, try again\n");
-                        output.flush();
-                    }
+                        // Check whether the submitted move is valid
+                    if (validateAndMove(location, playerNumber))
+                        {
+                        displayMessage("\nlocation: " + location);
+                        }
+                        else
+                        {
+                            output.format("Invalid move, try again\n");
+                            output.flush();
+                        }
+                        }
                 }
             }
 

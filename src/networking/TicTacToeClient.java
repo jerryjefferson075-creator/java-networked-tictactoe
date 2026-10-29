@@ -153,6 +153,10 @@ public class TicTacToeClient extends JFrame implements Runnable {
             String opponentMark = myMark.equals("X") ? "0" : "X";
 
             setMark(board[row][col], opponentMark);
+
+            // Opponent has finished their move, so it is now this client's turn
+            myTurn = true;
+            displayMessage("Your move.\n");
         } else if (message.equals("You win!")) {
             displayMessage("\n\nCongratulations! You have won!\n");
             myTurn = false;
